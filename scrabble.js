@@ -9,9 +9,6 @@ Scrabble.prototype.score = function(word) {
   var total = 0;
   var word = word.toUpperCase();
 
-  // Collapse this into a hash/object
-  // var values = [["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"], ["D", "G"],
-  // ["B", "C", "M", "P"], ["F", "H", "V", "W", "Y"], ["K"], ["J", "X"], ["Q", "Z"]]
   var one = ["A", "E", "I", "O", "U", "L", "N", "R", "S", "T"]
   var two = ["D", "G"]
   var three = ["B", "C", "M", "P"]
@@ -93,6 +90,9 @@ var Player = function(name, game) {
     } else {
       // The word is only added to the plays array if the player hasn't already won
         array.push(word);
+        // Returning true here, so that a user can see if their play was successful
+        // meaning, they haven't already won so the word was added to their plays array
+        return true;
       }
   };
   this.totalScore = function() {
@@ -122,8 +122,8 @@ myPlayer.play("Cat");
 myPlayer.play("ZZZZZZZ");
 myPlayer.play("QQQQQQ");
 myPlayer.play("QZE");
-console.log(myPlayer.totalScore());
-console.log(myPlayer.hasWon());
-console.log(myPlayer.highestScoringWord());
-console.log(myPlayer.highestWordScore());
-console.log(myPlayer.play("QZE"));
+console.log(myPlayer.name + "'s total score for this game is: " + myPlayer.totalScore() + " points");
+console.log(myPlayer.name + " has won the game: " + myPlayer.hasWon());
+console.log(myPlayer.name + "'s highest scoring word was: " + myPlayer.highestScoringWord());
+console.log("The score of " + myPlayer.name + "'s highest scoring word was: " + myPlayer.highestWordScore());
+console.log(myPlayer.name + " was able to play a word because they'd not yet won the game: " + myPlayer.play("Dog"));
