@@ -1,21 +1,8 @@
 'use strict';
 
-// Primary Requirements
-//
-// Create the following functions within the Scrabble module.
-//
-// score(word): returns the total score value for the given word. The word is input as a string (case insensitive). The chart below shows the point value for a given letter.
-// highestScoreFrom(arrayOfWords): returns the word in the array with the highest score.
-// Note that it’s better to use fewer tiles, so if the top score is tied between multiple words, pick the one with the fewest letters.
-// Note that there is a bonus (50 points) for using all seven letters. If the top score is tied between multiple words and one used all seven letters, choose the one with seven letters over the one with fewer tiles.
-// If the there are multiple words that are the same score and same length, pick the first one in supplied list.
+///////////// SCRABBLE ////////////////
 
 var Scrabble = function() {
-};
-
-// YOUR CODE HERE
-Scrabble.prototype.helloWorld = function() {
-  return 'hello world!';
 };
 
 Scrabble.prototype.score = function(word) {
@@ -81,7 +68,6 @@ Scrabble.prototype.highestScoreFrom = function(array) {
       }
     }
   }
-
   return winningWord;
 };
 
@@ -93,32 +79,21 @@ var myGame = new Scrabble();
 // console.log(myGame.winner(["cat","zebra", "zzzzzzzz", "qqqqqqq", "dog"]));
 // console.log(myGame.winner(["AE", "D", "G"]));
 
-// Commenting this out because I'm not sure why it's needed
-module.exports = Scrabble;
-
 ///////////// PLAYER ////////////////
 
-// Create a new Player object. The object should have the following functions:
-//
-// Constructor: Called when you use new Player(name), sets up an instance with the instance variable name assigned
-// name: property which returns the value of the player's name
-// plays: property which returns an Array of the words played by the player
-// play(word): Function which adds the input word to the plays Array
-// Returns false if player has already won
-// totalScore(): Function which sums up and returns the score of the players words
-// hasWon(): Function which returns true if the player has over 100 points, otherwise returns false
-// highestScoringWord(): Function which returns the highest scoring word the user has played
-// highestWordScore(): Function which returns the highestScoringWord score
-
-
 var Player = function(name, game) {
-  // Using the keyword this is what makes it a constructor
   var array = [];
   this.name = name;
+  // Connecting a Player object to a Scrabble object:
   this.game = game;
   this.plays = array;
   this.play = function(word) {
-    array.push(word);
+    if (this.hasWon()) {
+      return false;
+    } else {
+      // The word is only added to the plays array if the player hasn't already won
+        array.push(word);
+      }
   };
   this.totalScore = function() {
     var total = 0;
@@ -127,6 +102,7 @@ var Player = function(name, game) {
     }
     return total;
   };
+  // A player has won if the totalScore is over 100
   this.hasWon = function() {
     return (this.totalScore() > 100);
   };
@@ -135,18 +111,19 @@ var Player = function(name, game) {
   };
   this.highestWordScore = function() {
     return this.game.score(this.highestScoringWord());
-  }
+  };
 };
 
 // Testing
 
 var myPlayer = new Player("Bob", myGame);
 
-console.log(myPlayer.play("Cat"));
-console.log(myPlayer.play("ZZZZZZZ"));
-console.log(myPlayer.play("QQQQQQ"));
-console.log(myPlayer.play("QZE"));
+myPlayer.play("Cat");
+myPlayer.play("ZZZZZZZ");
+myPlayer.play("QQQQQQ");
+myPlayer.play("QZE");
 console.log(myPlayer.totalScore());
 console.log(myPlayer.hasWon());
 console.log(myPlayer.highestScoringWord());
 console.log(myPlayer.highestWordScore());
+console.log(myPlayer.play("QZE"));
