@@ -1,3 +1,5 @@
+'use strict';
+
 // Primary Requirements
 //
 // Create the following functions within the Scrabble module.
@@ -85,14 +87,14 @@ Scrabble.prototype.highestScoreFrom = function(array) {
 
 // Testing
 
-myGame = new Scrabble();
+var myGame = new Scrabble();
 
 // console.log(myGame.score("cat"));
 // console.log(myGame.winner(["cat","zebra", "zzzzzzzz", "qqqqqqq", "dog"]));
 // console.log(myGame.winner(["AE", "D", "G"]));
 
 // Commenting this out because I'm not sure why it's needed
-// module.exports = Scrabble;
+module.exports = Scrabble;
 
 ///////////// PLAYER ////////////////
 
@@ -119,7 +121,6 @@ var Player = function(name) {
   };
   this.totalScore = function() {
     var total = 0;
-    console.log(array);
     for (var i = 0; i < array.length; i++) {
       total += myGame.score(array[i]);
     }
@@ -127,14 +128,23 @@ var Player = function(name) {
   };
   this.hasWon = function() {
     return (this.totalScore() > 100);
+  };
+  this.highestScoringWord = function() {
+    return myGame.highestScoreFrom(this.plays);
+  };
+  this.highestWordScore = function() {
+    return myGame.score(this.highestScoringWord());
   }
 };
 
 // Testing
 
-myPlayer = new Player("Bob");
+var myPlayer = new Player("Bob");
 console.log(myPlayer.play("Cat"));
 console.log(myPlayer.play("ZZZZZZZ"));
-console.log(myPlayer.play("ZZZZZZZ"));
+console.log(myPlayer.play("QQQQQQ"));
+console.log(myPlayer.play("QZE"));
 console.log(myPlayer.totalScore());
 console.log(myPlayer.hasWon());
+console.log(myPlayer.highestScoringWord());
+console.log(myPlayer.highestWordScore());
