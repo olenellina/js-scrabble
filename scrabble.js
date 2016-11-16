@@ -111,10 +111,11 @@ module.exports = Scrabble;
 // highestWordScore(): Function which returns the highestScoringWord score
 
 
-var Player = function(name) {
+var Player = function(name, game) {
   // Using the keyword this is what makes it a constructor
   var array = [];
   this.name = name;
+  this.game = game;
   this.plays = array;
   this.play = function(word) {
     array.push(word);
@@ -122,7 +123,7 @@ var Player = function(name) {
   this.totalScore = function() {
     var total = 0;
     for (var i = 0; i < array.length; i++) {
-      total += myGame.score(array[i]);
+      total += this.game.score(array[i]);
     }
     return total;
   };
@@ -130,16 +131,17 @@ var Player = function(name) {
     return (this.totalScore() > 100);
   };
   this.highestScoringWord = function() {
-    return myGame.highestScoreFrom(this.plays);
+    return this.game.highestScoreFrom(this.plays);
   };
   this.highestWordScore = function() {
-    return myGame.score(this.highestScoringWord());
+    return this.game.score(this.highestScoringWord());
   }
 };
 
 // Testing
 
-var myPlayer = new Player("Bob");
+var myPlayer = new Player("Bob", myGame);
+
 console.log(myPlayer.play("Cat"));
 console.log(myPlayer.play("ZZZZZZZ"));
 console.log(myPlayer.play("QQQQQQ"));
