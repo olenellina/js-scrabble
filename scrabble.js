@@ -17,7 +17,6 @@ Scrabble.prototype.score = function(word) {
   var eight = ["J", "X"]
   var ten = ["Q", "Z"]
 
-
   for (var i = 0; i < word.length; i++) {
     if (one.includes(word.charAt(i))) {
       total += 1;
@@ -76,7 +75,7 @@ var myGame = new Scrabble();
 // console.log(myGame.winner(["cat","zebra", "zzzzzzzz", "qqqqqqq", "dog"]));
 // console.log(myGame.winner(["AE", "D", "G"]));
 
-///////////// PLAYER ////////////////
+// ///////////// PLAYER ////////////////
 
 var Player = function(name, game) {
   var array = [];
