@@ -17,7 +17,9 @@ Scrabble.prototype.score = function(word) {
   var eight = ["J", "X"]
   var ten = ["Q", "Z"]
 
-  for (var i = 0; i < word.length; i++) {
+  // Using let instead of var, due to feedback that this is better scoped than var
+  // as var has scope throughout the containing function
+  for (let i = 0; i < word.length; i++) {
     if (one.includes(word.charAt(i))) {
       total += 1;
     } else if (two.includes(word.charAt(i))) {
@@ -42,7 +44,7 @@ Scrabble.prototype.highestScoreFrom = function(array) {
   var winningWord = "";
   var wordScore = 0;
   var tie = [];
-  for (var i = 0; i < array.length; i++) {
+  for (let i = 0; i < array.length; i++) {
     wordScore = myGame.score(array[i]);
 
     if (array[i].length == 7) {
@@ -96,7 +98,7 @@ var Player = function(name, game) {
   };
   this.totalScore = function() {
     var total = 0;
-    for (var i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) {
       total += this.game.score(array[i]);
     }
     return total;
