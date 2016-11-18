@@ -77,6 +77,7 @@ var myGame = new Scrabble();
 // console.log(myGame.winner(["cat","zebra", "zzzzzzzz", "qqqqqqq", "dog"]));
 // console.log(myGame.winner(["AE", "D", "G"]));
 
+
 // ///////////// PLAYER ////////////////
 
 var Player = function(name, game) {
@@ -91,8 +92,8 @@ var Player = function(name, game) {
     } else {
       // The word is only added to the plays array if the player hasn't already won
         array.push(word);
-        // Returning true here, so that a user can see if their play was successful
-        // meaning, they haven't already won so the word was added to their plays array
+        // Returning true here, so that it would be possible (if desired) to see
+        //that the play was successful
         return true;
       }
   };
