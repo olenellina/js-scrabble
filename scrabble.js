@@ -43,7 +43,6 @@ Scrabble.prototype.highestScoreFrom = function(array) {
   var highestScore = 0;
   var winningWord = "";
   var wordScore = 0;
-  var tie = [];
   for (let i = 0; i < array.length; i++) {
     wordScore = myGame.score(array[i]);
 
